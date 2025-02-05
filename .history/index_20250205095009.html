@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <!--FONTES-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <title>Imc</title>
+</head>
+<body>
+    <div class="title">
+        <h1>Calculador de IMC</h1>
+    </div>
+    <!--title-->
+    <main class="mobile desktop"> 
+        <section id="resultPlace" class="result">
+            <h2 id="valueResult">Ainda não sabe qual o seu Índice de Massa Corporal (IMC)? </h2>
+            <p>Faça o cálculo aqui mesmo e conheça mais sobre o seu corpo.</p>
+        </section>
+        <!--result-->
+        <section class="calculate">
+            <h2>Para calcular o IMC (Índice de Massa Corporal), basta preencher os campos abaixo.</h2>
+            <form>
+                <div class="inputs-form">
+                    <input maxlength="3" class="height-input" id="inputHeight" type="number" placeholder="Altura (m)" step="0.1">
+                    <input maxlength="3" class="weight-input" id="inputWeight" type="number" placeholder="Peso (kg)" step="0.1">
+                </div>
+                <!--inputs-form-->
+                <button class="button-input" id="buttonResult" type="button">Calcular</button>
+            </form>
+        </section>
+        <!--calculate-->
+    </main>
+    <script src="./assets/js/main.js"></script>
+</body>
+</html>

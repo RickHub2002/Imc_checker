@@ -1,15 +1,17 @@
 function start() {
     buttonResult.addEventListener('click', renderImc);
-};
+}
 
 function renderImc() {
     let weight = Number(inputWeight.value);
     let height = Number(inputHeight.value);
+    
     console.log(weight);
     console.log(height);
 
     let imc = calculateImc(weight, height);
     console.log('imc', imc);
+    
     let imcStatsResult = imcStats(imc);
     console.log('imcStats', imcStatsResult);
 }
@@ -17,136 +19,79 @@ function renderImc() {
 function calculateImc(weight, height) {
     let imcValue = weight / (height * height);
     console.log('imcValue', imcValue);
-    return imcValue.toFixed(2);
-};
+    return parseFloat(imcValue.toFixed(2));
+}
 
 function imcStats(value) {
+    value = parseFloat(value);
+    console.log('imc recebido', value);
+    resultPlace.innerHTML = '';
+    
     const imc = document.createElement('p');
     imc.classList.add('imc');
     const stats = document.createElement('h2');
-    imc.classList.add('stats');
+    stats.classList.add('stats');
     const desc = document.createElement('p');
-    imc.classList.add('desc');
+    desc.classList.add('desc');
     
-    const img_abaixo_peso = document.createElement('img');
-    img_abaixo_peso.src = './assets/images/abaixo_peso.png';
-    img_abaixo_peso.classList.add('peso');
-
-    const img_normal_peso = document.createElement('img');
-    img_normal_peso.src = './assets/images/normal_peso.png';
-    img_normal_peso.classList.add('peso');
-
-    const img_sobrepeso_peso = document.createElement('img');
-    img_sobrepeso_peso.src = './assets/images/sobrepeso_peso.png';
-    img_sobrepeso_peso.classList.add('peso');
-
-    const img_obesidade_1 = document.createElement('img');
-    img_obesidade_1.src = './assets/images/obesidade_1_peso.png';
-    img_obesidade_1.classList.add('peso');
-
-    const img_obesidade_2 = document.createElement('img');
-    img_obesidade_2.src = './assets/images/obesidade_2_peso.png';
-    img_obesidade_2.classList.add('peso');
-
-    const img_obesidade_3 = document.createElement('img');
-    img_obesidade_3.src = './assets/images/obesidade_3_peso.png';
-    img_obesidade_3.classList.add('peso');
-
-    if(value >= 12 && value <= 16.9) {
-        resultPlace.innerHTML = '';
-
-        resultPlace.appendChild(img_abaixo_peso);
-
-        imc.textContent = `Imc: ${value}`;
-        resultPlace.appendChild(imc);
-        
-        stats.textContent = 'Muito abaixo do peso';
-        resultPlace.appendChild(stats);
-        
-        desc.textContent = 'Você está muito abaixo do peso ideal. Isso pode ser apenas uma cartiera pessoal, mas também pode ser um sinal de denutriçao ou de algum problema de saede. Caso esteja perdendo peso sem aparições motimo, procure um mécio.';
-        resultPlace.appendChild(desc);
-    } else if(value >= 17 && value <= 18.4) {
-        resultPlace.innerHTML = '';
-
-        resultPlace.appendChild(img_abaixo_peso);
-        
-        imc.textContent = `Imc: ${value}`;
-        resultPlace.appendChild(imc);
-        
-        stats.textContent = 'Abaixo do peso';
-        resultPlace.appendChild(stats);
-        
-        desc.textContent = 'Você está abaixo do peso ideal. Isso pode ser apenas uma cartiera pessoal, mas também pode ser um sinal de denutriçao ou de algum problema de saede. Caso esteja perdendo peso sem aparições motimo, procure um mécio.';
-        resultPlace.appendChild(desc);
-    } else if(value >= 18.5 && value <= 24.9) {
-        resultPlace.innerHTML = '';
-
-        resultPlace.appendChild(img_normal_peso);
-
-        imc.textContent = `Imc: ${value}`;
-        resultPlace.appendChild(imc);
-        
-        stats.textContent = 'Peso normal';
-        resultPlace.appendChild(stats);
-        
-        desc.textContent = 'Parabéns, você está com o peso normal. Recomendamos que mantenha hábitos saudáveis em seu dia a dia. Especialistas sugerem ingerir de 4 a 5 porções diárias de frutas, verduras e legumes, além da prática de exercícios físicos - pelo menos 150 minutos semanais.';
-        resultPlace.appendChild(desc);
-    } else if(value >= 25 && value <= 29.9) {
-        resultPlace.innerHTML = '';
-
-        resultPlace.appendChild(img_sobrepeso_peso);
-        
-        imc.textContent = `Imc: ${value}`;
-        resultPlace.appendChild(imc);
-        
-        stats.textContent = 'Sobrepeso';
-        resultPlace.appendChild(stats);
-        
-        desc.textContent = 'Atenção! Alguns quilos a mais já são suficientes para que algumas pessoas desenvolvam doenças associadas, como diabetes e hipertensão. É importante rever seus hábitos. Procure um médico.';
-        resultPlace.appendChild(desc);
-    } else if(value >= 30 && value <= 34.9) {
-        resultPlace.innerHTML = '';
-
-        resultPlace.appendChild(img_obesidade_1);
-
-        imc.textContent = `Imc: ${value}`;
-        resultPlace.appendChild(imc);
-        
-        stats.textContent = 'Obesidade grau 1';
-        resultPlace.appendChild(stats);
-        
-        desc.textContent = 'Sinal de alerta! O excesso de peso é fator de risco para desenvolvimento de outros problemas de saúde. A boa notícia é que uma pequena perda de peso já traz benefícios à saúde. Procure um médico para definir o tratamento mais adequado para você';
-        resultPlace.appendChild(desc);
-    } else if(value >= 35 && value <= 40) {
-        resultPlace.innerHTML = '';
-
-        resultPlace.appendChild(img_obesidade_2);
-        
-        imc.textContent = `Imc: ${value}`;
-        resultPlace.appendChild(imc);
-        
-        stats.textContent = 'Obesidade grau 2';
-        resultPlace.appendChild(stats);
-        
-        desc.textContent = 'Sinal vermelho! Ao atingir este nível de IMC, o risco de doenças associadas está entre alto e muito alto. Busque ajuda de um profissional de saúde; não perca tempo.';
-        resultPlace.appendChild(desc);
-    } else if(value > 40/*  && value !== Infinity */) {
-        resultPlace.innerHTML = '';
-
-        resultPlace.appendChild(img_obesidade_3);
-
-        imc.textContent = `Imc: ${value}`;
-        resultPlace.appendChild(imc);
-        
-        stats.textContent = 'Obesidade grau 3';
-        resultPlace.appendChild(stats);
-        
-        desc.textContent = 'Sinal vermelho! Ao atingir este nível de IMC, o risco de doenças associadas está entre alto e muito alto. Busque ajuda de um profissional de saúde; não perca tempo.';
-        resultPlace.appendChild(desc);
-    } else {
-        alert('Inválido');
-        console.error('Inválido');
+    const images = {
+        abaixo_peso: './assets/images/abaixo_peso.png',
+        normal_peso: './assets/images/normal_peso.png',
+        sobrepeso_peso: './assets/images/sobrepeso_peso.png',
+        obesidade_1: './assets/images/obesidade_1_peso.png',
+        obesidade_2: './assets/images/obesidade_2_peso.png',
+        obesidade_3: './assets/images/obesidade_3_peso.png'
     };
-};
+    
+    let imgSrc, statusText, descText;
+    
+    if (value >= 12 && value < 17) {
+        imgSrc = images.abaixo_peso;
+        statusText = 'Muito abaixo do peso';
+        descText = 'Você está muito abaixo do peso ideal. Caso esteja perdendo peso sem motivo aparente, procure um médico.';
+    } else if (value >= 17 && value < 18.5) {
+        imgSrc = images.abaixo_peso;
+        statusText = 'Abaixo do peso';
+        descText = 'Você está abaixo do peso ideal. Caso esteja perdendo peso sem motivo aparente, procure um médico.';
+    } else if (value >= 18.5 && value < 25) {
+        imgSrc = images.normal_peso;
+        statusText = 'Peso normal';
+        descText = 'Parabéns, você está com o peso normal. Continue com hábitos saudáveis!';
+    } else if (value >= 25 && value < 30) {
+        imgSrc = images.sobrepeso_peso;
+        statusText = 'Sobrepeso';
+        descText = 'Atenção! O sobrepeso pode causar problemas de saúde. Procure um médico.';
+    } else if (value >= 30 && value < 35) {
+        imgSrc = images.obesidade_1;
+        statusText = 'Obesidade grau 1';
+        descText = 'Sinal de alerta! O excesso de peso é um risco à saúde. Busque orientação médica.';
+    } else if (value >= 35 && value <= 40) {
+        imgSrc = images.obesidade_2;
+        statusText = 'Obesidade grau 2';
+        descText = 'Sinal vermelho! O risco de doenças é alto. Procure um profissional de saúde.';
+    } else if (value > 40) {
+        imgSrc = images.obesidade_3;
+        statusText = 'Obesidade grau 3';
+        descText = 'Sinal vermelho! O risco de doenças é muito alto. Busque ajuda médica imediatamente.';
+    } else {
+        alert('Valor inválido');
+        console.error('Inválido');
+        return;
+    }
+    
+    const imgElement = document.createElement('img');
+    imgElement.src = imgSrc;
+    imgElement.classList.add('peso');
+    resultPlace.appendChild(imgElement);
+    
+    imc.textContent = `IMC: ${value}`;
+    resultPlace.appendChild(imc);
+    
+    stats.textContent = statusText;
+    resultPlace.appendChild(stats);
+    
+    desc.textContent = descText;
+    resultPlace.appendChild(desc);
+}
 
 start();
